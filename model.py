@@ -29,9 +29,9 @@ def change_contact(last_name, changed_first_name, changed_last_name, changed_tel
     lines = file.readlines()
     file.close()
 
-    for ln in lines:
-        if last_name in ln:
-            ln = "/n" + changed_first_name + "/t" + changed_last_name + "/t" + changed_telephone_number
+    for i in range(len(lines)):
+        if last_name in lines[i]:
+            lines[i] = f"{changed_first_name}\t{changed_last_name}\t{changed_telephone_number}"
 
     file = open('phonebook.txt', 'w', encoding='utf-8')
     lines = file.writelines(lines)
@@ -44,9 +44,9 @@ def delete_contact(last_name):
     lines = file.readlines()
     file.close()
 
-    for ln in lines:
-        if last_name in ln:
-            ln = ""
+    for i in range(len(lines)):
+        if last_name in lines[i]:
+            lines[i] = ""
 
     file = open('phonebook.txt', 'w', encoding='utf-8')
     lines = file.writelines(lines)
