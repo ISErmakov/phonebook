@@ -35,29 +35,30 @@ def run():
         elif answer == "3": ## Найти контакт
             last_name = input("Введите Фамилию: ")
             data = model.find_contact(last_name)
-            view.show_contact(data)
+            view.output(data)
 
         elif answer == "4": ## Изменение контакта
             last_name = input("Введите Фамилию: ")
             data = model.find_contact(last_name)
-            view.show_contact(data)
-            changed_first_name = input("Введите новое Имя: ")
-            changed_last_name = input("Введите новую Фамилию: ")
-            changed_telephone_number = input("Введите новый номер телефона: ")
-            res = model.change_contact(last_name, changed_first_name, changed_last_name, changed_telephone_number)
-            view.output(res)
+            if data != "Контакт не найден":
+                changed_first_name = input("Введите новое Имя: ")
+                changed_last_name = input("Введите новую Фамилию: ")
+                changed_telephone_number = input("Введите новый номер телефона: ")
+                res = model.change_contact(last_name, changed_first_name, changed_last_name, changed_telephone_number)
+                view.output(res)
+            else:
+                view.output(data)
 
         elif answer == "5": ## Удаление контакта
             last_name = input("Введите Фамилию: ")
             data = model.find_contact(last_name)
-            confirm = view.confirm_delete(data)
-            if confirm:
+            if data != "Контакт не найден":
                 res = model.delete_contact(last_name)
                 view.output(res)
+            else:
+                view.output(data)
 
         elif answer == "0": ## Выйти из программы
             return
         else:
             view.output("Неверный ответ")
-
-
